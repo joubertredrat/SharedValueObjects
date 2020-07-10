@@ -10,7 +10,7 @@ use function is_null;
 use function sprintf;
 use function substr;
 
-final class Cellphone
+final class Cellphone implements PhoneNumberInterface
 {
     private string $number;
 
