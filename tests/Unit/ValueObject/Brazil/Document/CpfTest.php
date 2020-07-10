@@ -39,7 +39,7 @@ class CpfTest extends TestCase
 
     public function testIsNotValidLength(): void
     {
-        self::assertFalse(Cpf::isValid('75078185000156'));
+        self::assertFalse(Cpf::isValid('07089078000173'));
     }
 
     public function testIsNotValidRepeatedNumber(): void
