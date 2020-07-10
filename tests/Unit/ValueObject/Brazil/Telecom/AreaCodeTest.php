@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace RedRat\SharedValueObjects\Tests\Unit\ValueObject\Brazil\Document;
+namespace RedRat\SharedValueObjects\Tests\Unit\ValueObject\Brazil\Telecom;
 
 use PHPUnit\Framework\TestCase;
 use RedRat\SharedValueObjects\Exception\ValueObject\Brazil\Telecom\AreaCode\InvalidNumberException;
