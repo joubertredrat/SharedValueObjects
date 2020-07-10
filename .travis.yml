@@ -21,7 +21,7 @@ before_script:
   - composer install --no-interaction --no-suggest --no-progress
 
 script:
-  - composer run psr2
+  - composer run psr12
   - composer run tests
   - composer run coverage
 
