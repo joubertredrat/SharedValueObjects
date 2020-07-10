@@ -28,4 +28,6 @@ script:
 after_script:
   - mkdir -p build/logs
   - cp tests/_reports/unit/logs/clover.xml build/logs/clover.xml
+  - cp tests/_reports/unit/logs/clover.xml .
   - if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then ./cc-test-reporter after-build -t clover --exit-code $TRAVIS_TEST_RESULT; fi
+  - bash <(curl -s https://codecov.io/bash)
