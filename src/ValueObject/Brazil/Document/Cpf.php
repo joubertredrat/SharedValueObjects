@@ -51,11 +51,11 @@ final class Cpf
 
         $number = preg_replace("/[^\d]/", "", $number);
 
-        if (strlen($number) != 11) {
+        if (11 != strlen($number)) {
             return false;
         }
 
-        if (filter_var($number, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '/(\d)\1{10}/']]) !== false) {
+        if (false !== filter_var($number, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '/(\d)\1{10}/']])) {
             return false;
         }
 

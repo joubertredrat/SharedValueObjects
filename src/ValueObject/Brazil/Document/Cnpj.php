@@ -52,11 +52,11 @@ final class Cnpj
 
         $number = preg_replace("/[^\d]/", "", $number);
 
-        if (strlen($number) != 14) {
+        if (14 != strlen($number)) {
             return false;
         }
 
-        if (filter_var($number, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '/(\d)\1{13}/']]) !== false) {
+        if (false !== filter_var($number, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '/(\d)\1{13}/']])) {
             return false;
         }
 
