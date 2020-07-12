@@ -37,7 +37,7 @@ class LandlineTest extends TestCase
         self::assertFalse(Landline::isValid(null));
     }
 
-    public function testIsNotValidCode(): void
+    public function testIsNotValidNumber(): void
     {
         self::assertFalse(Landline::isValid('78101123'));
     }

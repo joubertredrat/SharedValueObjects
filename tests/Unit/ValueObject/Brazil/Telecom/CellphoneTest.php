@@ -38,7 +38,7 @@ class CellphoneTest extends TestCase
         self::assertFalse(Cellphone::isValid(null));
     }
 
-    public function testIsNotValidCode(): void
+    public function testIsNotValidNumber(): void
     {
         self::assertFalse(Cellphone::isValid('589864410'));
     }
