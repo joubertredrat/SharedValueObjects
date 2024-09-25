@@ -20,6 +20,16 @@ class CnpjTest extends TestCase
         self::assertEquals($cnpjNumberMaskedExpected, $cnpj->getNumberMasked());
     }
 
+    public function testAttributesNewFormat(): void
+    {
+        $cnpjNumberExpected = 'ABCDEFGIHIJK56';
+        $cnpjNumberMaskedExpected = 'AB.CDE.FGI/HIJK-56';
+        $cnpj = new Cnpj($cnpjNumberExpected);
+
+        self::assertEquals($cnpjNumberExpected, $cnpj->getNumber());
+        self::assertEquals($cnpjNumberMaskedExpected, $cnpj->getNumberMasked());
+    }
+
     public function testConstructThrowInvalidNumberException(): void
     {
         self::expectException(InvalidNumberException::class);

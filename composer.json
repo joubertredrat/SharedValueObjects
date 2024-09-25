@@ -33,8 +33,9 @@
       "vendor/squizlabs/php_codesniffer/bin/phpcs --standard=PSR12 --extensions=php,inc,lib src/",
       "vendor/squizlabs/php_codesniffer/bin/phpcs --standard=PSR12 --extensions=php,inc,lib tests/"
     ],
-    "tests": "vendor/phpunit/phpunit/phpunit -c tests/phpunit.unit.xml --no-coverage",
-    "coverage": "vendor/phpunit/phpunit/phpunit -c tests/phpunit.unit.xml",
+    "tests": "vendor/phpunit/phpunit/phpunit -c tests/phpunit.unit.xml --testdox --no-coverage",
+    "coverage": "XDEBUG_MODE=coverage vendor/phpunit/phpunit/phpunit -c tests/phpunit.unit.xml",
+    "coverage-console": "XDEBUG_MODE=coverage vendor/phpunit/phpunit/phpunit -c tests/phpunit.unit.xml --coverage-text",
     "coverage-show": [
       "@coverage",
       "xdg-open tests/_reports/unit/coverage/index.html"

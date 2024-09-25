@@ -16,6 +16,8 @@ use function substr;
 
 final class Cnpj
 {
+    private const ALPHA_ASCII_SUBTRACT = 48;
+
     private string $number;
 
     public function __construct(string $number)
@@ -50,38 +52,50 @@ final class Cnpj
             return false;
         }
 
-        $number = preg_replace("/[^\d]/", "", $number);
+        $number = preg_replace('/[^A-Za-z0-9]/', '', $number);
 
         if (14 != strlen($number)) {
             return false;
         }
 
-        if (false !== filter_var($number, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '/(\d)\1{13}/']])) {
+        if (false !== filter_var($number, FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '/([A-Za-z0-9])\1{13}/']])) {
             return false;
         }
 
+        $numbers = self::convert($number);
+
         $sum = [];
         for ($i = 0, $j = 5; $i < 12; $i++) {
-            $sum[] = $number[$i] * $j;
+            $sum[] = $numbers[$i] * $j;
             $j = ($j == 2) ? 9 : $j - 1;
         }
 
         $rest = array_sum($sum) % 11;
         $digit1 = $rest < 2 ? 0 : 11 - $rest;
 
-        if ($number[12] != $digit1) {
+        if ($numbers[12] != $digit1) {
             return false;
         }
 
         $sum = [];
         for ($i = 0, $j = 6; $i < 13; $i++) {
-            $sum[] = $number[$i] * $j;
+            $sum[] = $numbers[$i] * $j;
             $j = ($j == 2) ? 9 : $j - 1;
         }
 
         $rest = array_sum($sum) % 11;
         $digit2 = $rest < 2 ? 0 : 11 - $rest;
 
-        return $number[13] == $digit2;
+        return $numbers[13] == $digit2;
+    }
+
+    private static function convert(string $number): array
+    {
+        $numbers = [];
+        foreach (str_split($number) as $char) {
+            $numbers[] = ctype_alpha($char) ? ord(strtoupper($char)) - self::ALPHA_ASCII_SUBTRACT : (int) $char;
+        }
+
+        return $numbers;
     }
 }
